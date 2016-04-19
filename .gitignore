@@ -1,3 +1,7 @@
 .idea
 .gradle
 build
+complex-echo-engine.iml
+complex-echo-engine.ipr
+complex-echo-engine.iws
+gradle
