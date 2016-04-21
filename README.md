@@ -60,5 +60,4 @@ MESSAGE
 MESSAGE
 ```
 
-
 > NOTE: When all players have sent messages, a broadcast will be sent out. If a player sends another message before other players, the server will respond with a 406
