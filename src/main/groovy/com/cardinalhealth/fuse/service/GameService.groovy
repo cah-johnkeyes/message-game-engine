@@ -21,4 +21,39 @@ class GameService {
     Game getGame(Integer id) {
         return games.find { it.id == id }
     }
+
+    Game joinGame(Integer gameId, Player player) {
+        def game = getGame(gameId)
+        game.playerTwo = player
+        return game
+    }
+
+    void saveMessage(int gameId, Player player, String message) {
+        def game = getGame(gameId)
+
+        if (game.playerHasSentMessage(player))
+            throw new IllegalArgumentException("Message can not be saved. Waiting for other player.")
+
+        game.addMessage(player, message)
+
+        if (playersShouldBeNotified(game)) {
+            notifyPlayers(game)
+            game.clearMessages()
+        }
+    }
+
+    void endGame(int gameId) {
+        def game = getGame(gameId)
+        games.remove(game)
+    }
+
+    private playersShouldBeNotified(Game game) {
+        return game.playerHasSentMessage(game.playerOne) && game.playerHasSentMessage(game.playerTwo)
+    }
+
+    private void notifyPlayers(Game game) {
+        playersHaveBeenNotified = true
+    }
+
+    boolean playersHaveBeenNotified = false
 }
