@@ -61,7 +61,7 @@ class GameServiceSpec extends Specification {
         given:
         def game = gameService.startGame()
         game = gameService.joinGame(game.id, playerTwo)
-        def message = "you're out of your element!"
+        def message = "it really tied the room together"
 
         when:
         gameService.saveMessage(game.id, playerOne, message)
