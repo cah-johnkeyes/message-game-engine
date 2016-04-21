@@ -4,7 +4,7 @@ import javax.persistence.Entity
 import javax.persistence.ManyToOne
 
 @Entity
-class Message extends BaseDomain {
+    class Message extends BaseDomain {
     String value
 
     @ManyToOne

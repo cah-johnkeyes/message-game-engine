@@ -3,7 +3,7 @@ package com.cardinalhealth.fuse.domain
 import javax.persistence.*
 
 @MappedSuperclass
-class BaseDomain {
+abstract class BaseDomain implements Serializable {
 
     @Id
     @GeneratedValue

@@ -1,6 +1,9 @@
 package com.cardinalhealth.fuse.resource
 
+import com.cardinalhealth.fuse.domain.Exchange
+import com.cardinalhealth.fuse.domain.Message
 import com.cardinalhealth.fuse.domain.Player
+import com.cardinalhealth.fuse.service.GameService
 import com.cardinalhealth.fuse.service.PlayerService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PathVariable
@@ -16,7 +19,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST
 class PlayerResource {
 
     @Autowired
-    PlayerService playerService
+    private PlayerService playerService
+
+    @Autowired
+    private GameService gameService
 
     @RequestMapping(method = POST)
     Player create(@RequestBody Player player) {
@@ -27,4 +33,30 @@ class PlayerResource {
     Player get(@PathVariable Integer id) {
         return playerService.get(id)
     }
+
+    @RequestMapping(value = "/{playerId}/game/{gameId}/message", method = POST)
+    Exchange sendMessage(@PathVariable Integer playerId,
+                         @PathVariable Integer gameId,
+                         @RequestBody Message message) {
+        def player = playerService.get(playerId)
+        def game = gameService.get(gameId)
+
+        return gameService.saveMessage(game, player, message)
+    }
+
+    //    @RequestMapping(value = "/{gameId}/exchange/{playerId}", method = POST)
+//    Exchange createExchange(@PathVariable Integer gameId, @RequestBody Exchange exchange) {
+//        return gameService.startExchange(gameId, exchange)
+//    }
+//
+//    @RequestMapping(value = "/{gameId}/exchange/{exchangeId}", method = GET)
+//    Exchange getExchange(@PathVariable Integer gameId, @PathVariable Integer exchangeId) {
+//       return gameService.getExchange(exchangeId)
+//    }
+//
+//    @RequestMapping(value = "/{gameId}/exchange/{exchangeId}", method = GET)
+//    Exchange updateExchange(@PathVariable Integer gameId, @PathVariable Integer exchangeId, @RequestBody Exchange exchange) {
+//        return gameService.updateExchange(exchange)
+//    }
+
 }

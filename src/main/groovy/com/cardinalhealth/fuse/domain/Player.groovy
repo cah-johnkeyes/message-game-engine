@@ -7,4 +7,5 @@ class Player extends BaseDomain {
 
     String name
     String avatar
+    String deviceId
 }

@@ -13,4 +13,6 @@ class Exchange extends BaseDomain {
 
     @ManyToOne
     Message responseMessage
+
+    boolean isComplete
 }
