@@ -13,7 +13,7 @@ class PlayerService {
             throw new IllegalArgumentException("Username is Required")
         }
 
-        players.add(player)
+        players << player
         return player
     }
 
