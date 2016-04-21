@@ -61,3 +61,10 @@ MESSAGE
 ```
 
 > NOTE: When all players have sent messages, a broadcast will be sent out. If a player sends another message before other players, the server will respond with a 406
+
+## Ending a Game
+__`DELETE`__ `/game/{gameId}`
+#### Body
+TBA
+#### Response
+_No Response_
