@@ -14,6 +14,7 @@ class PlayerService {
         }
 
         players.add(player)
+        return player
     }
 
     Player get(String username) {

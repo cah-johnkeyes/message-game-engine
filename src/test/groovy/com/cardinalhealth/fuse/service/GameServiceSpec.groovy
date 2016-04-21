@@ -15,42 +15,32 @@ class GameServiceSpec extends Specification {
         gameService = new GameService()
     }
 
-    def "it requires a player to start a game"() {
-        when:
-        gameService.startGame(null)
-
-        then:
-        IllegalArgumentException ex = thrown()
-    }
-
     def "it starts a game"() {
         when:
-        def game = gameService.startGame(playerOne)
+        def game = gameService.startGame()
 
         then:
         game != null
-        game.players.size() == 1
-        game.players.contains(playerOne)
         game.id > 0
     }
 
     def "it joins a player to the game"() {
         given:
-        def game = gameService.startGame(playerOne)
+        def game = gameService.startGame()
 
         when:
         def result = gameService.joinGame(game.id, playerTwo)
 
         then:
         result.id == game.id
-        game.players.size() == 2
+        game.players.size() == 1
         game.players.contains(playerTwo)
     }
 
     def "it gives each game a unique id"() {
         when:
-        def game1 = gameService.startGame(playerOne)
-        def game2 = gameService.startGame(playerOne)
+        def game1 = gameService.startGame()
+        def game2 = gameService.startGame()
 
         then:
         game1.id != game2.id
@@ -58,7 +48,7 @@ class GameServiceSpec extends Specification {
 
     def "it retrieves games by their id"() {
         given:
-        def game = gameService.startGame(playerOne)
+        def game = gameService.startGame()
 
         when:
         def result = gameService.getGame(game.id)
@@ -69,7 +59,7 @@ class GameServiceSpec extends Specification {
 
     def "it tracks a message from a player"() {
         given:
-        def game = gameService.startGame(playerOne)
+        def game = gameService.startGame()
         game = gameService.joinGame(game.id, playerTwo)
         def message = "you're out of your element!"
 
@@ -82,7 +72,7 @@ class GameServiceSpec extends Specification {
 
     def "it prevents player from sending message until response is in"() {
         given:
-        def game = gameService.startGame(playerOne)
+        def game = gameService.startGame()
         game = gameService.joinGame(game.id, playerTwo)
         def messageOne = "nice marmot"
         def messageTwo = "obviously, you're not a golfer"
@@ -97,7 +87,7 @@ class GameServiceSpec extends Specification {
 
     def "it notifies players when both messages are received"() {
         given:
-        def game = gameService.startGame(playerOne)
+        def game = gameService.startGame()
         game = gameService.joinGame(game.id, playerTwo)
         def messageOne = "you're out of your element!"
         def messageTwo = "I am the walrus"
@@ -114,7 +104,7 @@ class GameServiceSpec extends Specification {
 
     def "it finishes a game"() {
         given:
-        def game = gameService.startGame(playerOne)
+        def game = gameService.startGame()
 
         when:
         gameService.endGame(game.id)
