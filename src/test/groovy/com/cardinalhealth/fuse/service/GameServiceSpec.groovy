@@ -29,8 +29,8 @@ class GameServiceSpec extends Specification {
 
         then:
         game != null
-        game.playerOne == playerOne
-        game.playerTwo == null
+        game.players.size() == 1
+        game.players.contains(playerOne)
         game.id > 0
     }
 
@@ -43,7 +43,8 @@ class GameServiceSpec extends Specification {
 
         then:
         result.id == game.id
-        result.playerTwo == playerTwo
+        game.players.size() == 2
+        game.players.contains(playerTwo)
     }
 
     def "it gives each game a unique id"() {

@@ -9,8 +9,9 @@ class PlayerService {
     static List<Player> players = []
 
     def register(Player player) {
-        if (!player.username)
+        if (!player.username) {
             throw new IllegalArgumentException("Username is Required")
+        }
 
         players.add(player)
     }

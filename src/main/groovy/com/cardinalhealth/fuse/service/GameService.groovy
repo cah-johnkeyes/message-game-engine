@@ -12,7 +12,8 @@ class GameService {
         if (!player)
             throw new IllegalArgumentException("A Player is Required to Start a Game")
 
-        def game = new Game(id: ++nextGameId, playerOne: player)
+        def game = new Game(id: ++nextGameId)
+        game.players << player
         games.add(game)
 
         return game
@@ -24,19 +25,20 @@ class GameService {
 
     Game joinGame(Integer gameId, Player player) {
         def game = getGame(gameId)
-        game.playerTwo = player
+        game.players << player
         return game
     }
 
     void saveMessage(int gameId, Player player, String message) {
         def game = getGame(gameId)
 
-        if (game.playerHasSentMessage(player))
+        if (game.playerHasSentMessage(player)) {
             throw new IllegalArgumentException("Message can not be saved. Waiting for other player.")
+        }
 
         game.addMessage(player, message)
 
-        if (playersShouldBeNotified(game)) {
+        if (game.allPlayersHaveSentMessage()) {
             notifyPlayers(game)
             game.clearMessages()
         }
@@ -45,10 +47,6 @@ class GameService {
     void endGame(int gameId) {
         def game = getGame(gameId)
         games.remove(game)
-    }
-
-    private playersShouldBeNotified(Game game) {
-        return game.playerHasSentMessage(game.playerOne) && game.playerHasSentMessage(game.playerTwo)
     }
 
     private void notifyPlayers(Game game) {
