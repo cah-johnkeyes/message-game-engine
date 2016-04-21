@@ -13,11 +13,24 @@ class PlayerService {
             throw new IllegalArgumentException("Username is Required")
         }
 
-        players << player
+        removeExistingPlayer(player)
+        addNewPlayer(player)
+
         return player
     }
 
     Player get(String username) {
         return players.find { it.username == username }
+    }
+
+    private void removeExistingPlayer(Player player) {
+        def existingPlayer = get(player.username)
+        if (existingPlayer) {
+            players.remove(existingPlayer)
+        }
+    }
+
+    private boolean addNewPlayer(Player player) {
+        players << player
     }
 }

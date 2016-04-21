@@ -1,0 +1,4 @@
+applications:
+  - name: message_engine
+    memory: 512MB
+    path: build/libs/complex-echo-engine-0.0.1-SNAPSHOT.jar

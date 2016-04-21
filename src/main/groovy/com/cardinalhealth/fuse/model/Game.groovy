@@ -7,7 +7,6 @@ class Game {
 
     private Map messages = [:]
 
-
     void addMessage(Player player, String message) {
         messages[player] = message
     }
