@@ -1,21 +1,21 @@
 package com.cardinalhealth.fuse.service
 
-import com.cardinalhealth.fuse.domain.Player
-import com.cardinalhealth.fuse.repository.PlayerRepository
-import org.springframework.beans.factory.annotation.Autowired
+import com.cardinalhealth.fuse.model.Player
 import org.springframework.stereotype.Service
 
 @Service
 class PlayerService {
 
-    @Autowired
-    PlayerRepository playerRepository
+    static List<Player> players = []
 
-    Player register(Player player) {
-        return playerRepository.save(player)
+    def register(Player player) {
+        if (!player.username)
+            throw new IllegalArgumentException("Username is Required")
+
+        players.add(player)
     }
 
-    Player get(Integer id) {
-        return playerRepository.getOne(id)
+    Player get(String username) {
+        return players.find { it.username == username }
     }
 }
