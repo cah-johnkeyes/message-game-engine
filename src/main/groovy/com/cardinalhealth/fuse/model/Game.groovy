@@ -5,7 +5,7 @@ class Game {
     List<Player> players = []
     Integer id
 
-    private Map messages = [:]
+    Map messages = [:]
 
     void addMessage(Player player, String message) {
         messages[player] = message
@@ -22,5 +22,4 @@ class Game {
     void clearMessages() {
         messages = [:]
     }
-
 }
