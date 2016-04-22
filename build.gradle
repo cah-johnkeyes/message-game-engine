@@ -16,8 +16,8 @@ apply plugin: 'spring-boot'
 apply plugin: 'idea'
 
 jar {
-    baseName = 'complex-echo-engine'
-    version = '0.0.1-SNAPSHOT'
+    baseName = 'engine'
+    version = '1.0'
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

@@ -1,4 +1,4 @@
 applications:
-  - name: message_engine
-    memory: 512MB
-    path: build/libs/complex-echo-engine-0.0.1-SNAPSHOT.jar
+  - name: message-game-engine
+    memory: 1024MB
+    path: build/libs/engine-1.0.jar
