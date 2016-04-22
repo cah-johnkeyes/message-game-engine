@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 class GameService {
 
     @Autowired
-    GoogleApi googleApi
+    NotificationService notificationService
 
     private static int nextGameId = 1
     private static List<Game> games = []
@@ -49,17 +49,11 @@ class GameService {
 
     void endGame(int gameId) {
         def game = getGame(gameId)
-        notifyPlayersGameHasEnded()
+        notifyPlayers(game)
         games.remove(game)
     }
 
     private void notifyPlayers(Game game) {
-
+        notificationService.sendNotification(game.players, game)
     }
-
-    private void notifyPlayersGameHasEnded() {
-        // broadcast winner to all players
-    }
-
-    boolean playersHaveBeenNotified = false
 }
