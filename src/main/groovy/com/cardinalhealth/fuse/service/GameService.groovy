@@ -49,6 +49,7 @@ class GameService {
 
     void endGame(int gameId) {
         def game = getGame(gameId)
+        game.completed = true
         notifyPlayers(game)
         games.remove(game)
     }

@@ -4,6 +4,7 @@ class Game {
 
     List<Player> players = []
     Integer id
+    boolean completed
 
     Map messages = [:]
 

@@ -8,11 +8,13 @@ class GameServiceSpec extends Specification {
     Player playerOne
     Player playerTwo
     GameService gameService
+    NotificationService notificationService
 
     def setup() {
+        notificationService = Mock(NotificationService)
         playerOne = new Player(username:  "walter")
         playerTwo = new Player(username: "donnie")
-        gameService = new GameService()
+        gameService = new GameService(notificationService: notificationService)
     }
 
     def "it starts a game"() {
@@ -83,23 +85,6 @@ class GameServiceSpec extends Specification {
 
         then:
         IllegalArgumentException exception = thrown()
-    }
-
-    def "it notifies players when both messages are received"() {
-        given:
-        def game = gameService.startGame()
-        game = gameService.joinGame(game.id, playerTwo)
-        def messageOne = "you're out of your element!"
-        def messageTwo = "I am the walrus"
-
-        when:
-        gameService.saveMessage(game.id, playerOne, messageOne)
-        gameService.saveMessage(game.id, playerTwo, messageTwo)
-
-        then:
-        !game.messages[playerOne]
-        !game.messages[playerTwo]
-        gameService.playersHaveBeenNotified
     }
 
     def "it finishes a game"() {
