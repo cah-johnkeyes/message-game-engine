@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE
-import static org.springframework.web.bind.annotation.RequestMethod.POST
+import static org.springframework.web.bind.annotation.RequestMethod.*
 
 @RestController
 @RequestMapping("/game")
@@ -43,5 +42,10 @@ class GameController {
     @RequestMapping(value = "{gameId}", method = DELETE)
     void endGame(@PathVariable Integer gameId) {
         gameService.endGame(gameId)
+    }
+
+    @RequestMapping(value = "{gameId}", method = GET)
+    void getGame(@PathVariable Integer gameId) {
+        gameService.getGame(gameId)
     }
 }

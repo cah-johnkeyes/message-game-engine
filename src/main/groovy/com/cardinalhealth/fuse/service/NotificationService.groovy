@@ -23,7 +23,6 @@ class NotificationService {
     }
 
     void sendNotification(String token, Object message) {
-        def data = new JsonBuilder(message).toString()
-        googleApi.sendGcmMessage([to:token, data:data])
+        googleApi.sendGcmMessage([to:token, data:message])
     }
 }
