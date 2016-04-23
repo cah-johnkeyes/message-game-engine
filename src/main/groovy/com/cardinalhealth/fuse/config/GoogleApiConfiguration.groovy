@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration
 import retrofit.RestAdapter
 import retrofit.client.OkClient
 
-import static retrofit.RestAdapter.LogLevel.BASIC
+import static retrofit.RestAdapter.LogLevel.FULL
 
 @Configuration
 class GoogleApiConfiguration {
@@ -25,7 +25,7 @@ class GoogleApiConfiguration {
                 .setClient(okClient)
                 .setRequestInterceptor(googleApiRequestInterceptor)
                 .setEndpoint(googleApiUrl)
-                .setLogLevel(BASIC)
+                .setLogLevel(FULL)
                 .build()
                 .create(GoogleApi)
     }

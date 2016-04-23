@@ -69,7 +69,7 @@ class GameServiceSpec extends Specification {
         gameService.saveMessage(game.id, playerOne, message)
 
         then:
-        game.messages[playerOne] == message
+        game.messages[playerOne.username] == message
     }
 
     def "it prevents player from sending message until response is in"() {
