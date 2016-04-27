@@ -1,5 +1,15 @@
 # Message Game Engine
 
+## Running the Services
+1. Download and Install Git - https://git-scm.com/downloads
+2. Open `Command Prompt` on Windows or `Terminal` on Mac 
+3. Run the following commands
+```shell
+git clone https://kdkdkd.coksd
+cd message-game-engine
+gradlew.bat bootRun
+```
+
 ## Registering a Player
 __`POST`__ `/player`
 ##### Body
