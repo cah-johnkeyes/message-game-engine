@@ -5,7 +5,7 @@
 2. Open `Command Prompt` on Windows or `Terminal` on Mac 
 3. Run the following commands
 ```shell
-git clone https://kdkdkd.coksd
+git clone https://github.com/cah-johnkeyes/message-game-engine.git
 cd message-game-engine
 gradlew.bat bootRun
 ```
